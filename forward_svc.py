@@ -5,6 +5,9 @@ from flask import abort
 import urllib
 import urllib2
 
+listen_ip = "127.0.0.1"
+listen_port = "8089"
+
 app = Flask(__name__)
 
 @app.route("/", methods=['POST'])
@@ -20,14 +23,13 @@ def parse_test():
 
         msg_chat = urllib.quote(request.json['text'])
         msg_url = 'https://api.telegram.org/bot{}/sendMessage?chat_id={}&text={}'.format(request.json['token'], request.json['chatid'], msg_chat ).encode('UTF-8')
-        print(msg_url)
+        print(msg_url)  #debug stuff
 
         get = urllib2.urlopen(msg_url)
 
         return jsonify({'text': msg}), 201
 
 if __name__ == "__main__":
-        app.run(host="127.0.0.1", port="8079")
-
+        app.run(host=listen_ip, port=listen_port)
 
 
