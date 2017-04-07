@@ -12,7 +12,6 @@ app = Flask(__name__)
 
 @app.route("/", methods=['POST'])
 
-
 def wait_message():
         if not request.json or not 'text' in request.json or not 'chatid' in request.json or not 'token' in request.json:
                 abort(400)
